@@ -11,61 +11,53 @@ import { ApiService } from 'src/app/services/api.service';
 export class PokemonPage implements OnInit {
 
   pokemonList: any[] = [];
-  offset: number = 0;
-  limit: number = 20;
+  filteredPokemonList: any[] = [];
+  selectedPokemon: any = null;
+  searchTerm: string = '';
 
-  constructor(private pokemonSvc: ApiService) {}
+  private pokemonSvc = inject(ApiService);
+
+  constructor() {}
 
   ngOnInit() {
     this.loadPokemonList();
   }
 
-  loadPokemonList(event?: any) {
-    this.pokemonSvc.getPokemonList(this.limit, this.offset).subscribe(
+  loadPokemonList() {
+    this.pokemonSvc.getPokemonList(1000).subscribe(
       (response) => {
-        const newPokemon = response.results;
-        this.pokemonList = [...this.pokemonList, ...newPokemon];
-        this.loadPokemonDetails(newPokemon);
-        
-        if (event) {
-          event.target.complete();
-        }
-        
-        this.offset += this.limit;
-
-        // Si no hay más Pokémon para cargar, deshabilitar el infinite scroll
-        if (this.pokemonList.length >= response.count) {
-          event.target.disabled = true;
-        }
+        this.pokemonList = response.results;
+        this.filteredPokemonList = this.pokemonList;
       },
       (error) => {
         console.error('Error al obtener la lista de Pokémon:', error);
-        if (event) {
-          event.target.complete();
-        }
       }
     );
   }
 
-  loadPokemonDetails(pokemonList: any[]) {
-    pokemonList.forEach((pokemon) => {
-      this.pokemonSvc.getPokemon(this.extractPokemonId(pokemon.url)).subscribe(
-        (details) => {
-          pokemon.details = details;
+  loadPokemonDetails(pokemonName: string) {
+    this.pokemonSvc.getPokemonDetails(pokemonName).subscribe(
+      (response) => {
+        this.selectedPokemon = response;
+      },
+      (error) => {
+        console.error('Error al obtener detalles del Pokémon:', error);
+      }
+    );
+  }
+
+  searchPokemon() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredPokemonList = this.pokemonList;
+    } else {
+      this.pokemonSvc.searchPokemon(this.searchTerm).subscribe(
+        (results) => {
+          this.filteredPokemonList = results;
         },
         (error) => {
-          console.error(`Error al obtener detalles de ${pokemon.name}:`, error);
+          console.error('Error en la búsqueda de Pokémon:', error);
         }
       );
-    });
-  }
-
-  extractPokemonId(url: string): number {
-    const parts = url.split('/');
-    return parseInt(parts[parts.length - 2], 10);
-  }
-
-  loadMore(event: any) {
-    this.loadPokemonList(event);
+    }
   }
 }

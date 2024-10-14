@@ -1,26 +1,22 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-title>Lista de Pokémon</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header backButton="/main/home" title="Lista pokemon"></app-header>
   
-  <ion-content>
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchPokemon()" placeholder="Buscar Pokémon"></ion-searchbar>
+  
     <ion-list>
-      <ion-item *ngFor="let pokemon of pokemonList">
-        <ion-avatar slot="start">
-          <img [src]="pokemon.details?.sprites.front_default" alt="{{ pokemon.name }}">
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ pokemon.name | titlecase }}</h2>
-          <p *ngIf="pokemon.details">Tipo: {{ pokemon.details.types[0].type.name | titlecase }}</p>
-        </ion-label>
+      <ion-item *ngFor="let pokemon of filteredPokemonList" (click)="loadPokemonDetails(pokemon.name)">
+        {{ pokemon.name }}
       </ion-item>
     </ion-list>
-    
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Cargando más Pokémon...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+  
+    <div *ngIf="selectedPokemon">
+      <h2>{{ selectedPokemon.name }}</h2>
+      <img [src]="selectedPokemon.sprites.front_default" alt="{{ selectedPokemon.name }}">
+      <p>Altura: {{ selectedPokemon.height }}</p>
+      <p>Peso: {{ selectedPokemon.weight }}</p>
+      <p>Tipos:</p>
+      <ul>
+        <li *ngFor="let type of selectedPokemon.types">{{ type.type.name }}</li>
+      </ul>
+    </div>
   </ion-content>

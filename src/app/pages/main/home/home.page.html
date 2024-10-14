@@ -1,0 +1,22 @@
+<app-header signOut="signOuts()" title="Inicio"></app-header>
+
+<ion-content [fullscreen]="true">
+
+  <br><br><br>
+
+  <div class="botones" >
+    <ion-button class="compartir" routerLink="/main/registro-vehiculo"><img src="assets/img/share.png" alt="Ups" width="50px" >Compartir Vehículo</ion-button>
+    <br><br><br>
+    <ion-button class="buscar" routerLink="/main/buscar-vehiculo"><img src="assets/img/buscar.png" alt="Ups" width="50px" >Buscar vehículo</ion-button>
+    <br><br><br>
+  <br><br><br>
+  <ion-button (click)="signOut()" color="danger" class="btn-danger">
+    Cerrar Sesion
+  </ion-button>
+  
+  </div> 
+  
+
+</ion-content>
+
+<app-footer></app-footer>

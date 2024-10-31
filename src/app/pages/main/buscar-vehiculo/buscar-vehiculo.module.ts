@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BuscarVehiculoPageRoutingModule } from './buscar-vehiculo-routing.module';
 
 import { BuscarVehiculoPage } from './buscar-vehiculo.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BuscarVehiculoPageRoutingModule
+    BuscarVehiculoPageRoutingModule,
+    SharedModule
   ],
   declarations: [BuscarVehiculoPage]
 })

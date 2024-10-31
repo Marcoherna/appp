@@ -9,6 +9,10 @@ export class BuscarVehiculoPage implements OnInit {
 
   constructor() { }
 
+  select(){
+    return alert("Ruta seleccionada")
+  }
+
   ngOnInit() {
   }
 

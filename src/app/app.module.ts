@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot({mode:	'md'}), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), //se coloca mode md para que el diseño se vea igual en todos los dispositivos

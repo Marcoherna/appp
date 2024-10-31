@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ApiService } from '../services/api.service';
+import { RouterModule } from '@angular/router';
+import { AddUpdateVehicleComponent } from './components/add-update-vehicle/add-update-vehicle.component';
 
 
 
@@ -15,14 +17,16 @@ import { ApiService } from '../services/api.service';
     HeaderComponent, 
     CustomInputComponent,
     LogoComponent,
-    FooterComponent
+    FooterComponent,
+    AddUpdateVehicleComponent,
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     ReactiveFormsModule,
-    FooterComponent
+    FooterComponent,
+    AddUpdateVehicleComponent,
   ],
   imports: [
     CommonModule,

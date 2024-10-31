@@ -18,6 +18,17 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule), canActivate: [AuthGuard]
   },
+  /*{
+    path: 'not-found',
+    loadComponent: async () => {
+       const m = await import('./shared/pages/not-found/not-found.component');
+       return m.NotFoundComponent;
+      }
+  },*/
+  {
+    path: '**',
+    loadComponent: () => import('./shared/pages/not-found/not-found.component').then((m) => m.NotFoundComponent)
+  },
 ];
 
 @NgModule({

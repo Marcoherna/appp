@@ -14,7 +14,7 @@ export const environment = {
     appId: "1:658419843742:web:5d5ba6926b2b5bd4e9318f"
   },
   baseUrl : 'https://pokeapi.co/api/v2',
-  googleMapsApiKey: 'AIzaSyCw_crDbkK7hvoszPRpZTWp9bnyw8QGpGM'
+  googleMapsApiKey: ''
 
 
 

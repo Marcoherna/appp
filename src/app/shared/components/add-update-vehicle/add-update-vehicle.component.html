@@ -1,0 +1,85 @@
+<app-header [isModal]="true" [title]="vehiculo ? 'Actualizar Vehículo' : 'Agregar Vehículo'"></app-header>
+<ion-content>
+    <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+        <app-custom-input
+        
+        autocomplete="marca" 
+        [control]="form.controls.marca"
+        type="text"
+        label="Marca" 
+        label-placement="floating"
+        ></app-custom-input>
+        <div class="validators" *ngIf="form.controls.marca.errors && form.controls.marca.touched">
+        
+          <div *ngIf="form.controls.marca.errors?.['required']">La marca es requerida</div>
+
+        </div>
+
+        <app-custom-input
+        
+        autocomplete="modelo" 
+        [control]="form.controls.modelo"
+        type="text"
+        label="Modelo" 
+        label-placement="floating"
+        ></app-custom-input>
+        <div class="validators" *ngIf="form.controls.modelo.errors && form.controls.modelo.touched">
+        
+          <div *ngIf="form.controls.modelo.errors?.['required']">El modelo es requerido</div>
+
+        </div>
+
+        <app-custom-input
+        
+        autocomplete="anio" 
+        [control]="form.controls.anio"
+        type="number"
+        label="Año" 
+        label-placement="floating"
+        ></app-custom-input>
+        <div class="validators" *ngIf="form.controls.anio.errors && form.controls.anio.touched">
+        
+          <div *ngIf="form.controls.anio.errors?.['required']">El año es requerido</div>
+          <div *ngIf="form.controls.anio.errors?.['min']">El año debe ser del 2000 en adelante</div>
+
+        </div>
+
+        <app-custom-input
+        
+        autocomplete="patente" 
+        [control]="form.controls.patente"
+        type="text"
+        label="Patente" 
+        label-placement="floating"
+        ></app-custom-input>
+        <div class="validators" *ngIf="form.controls.patente.errors && form.controls.patente.touched">
+        
+          <div *ngIf="form.controls.patente.errors?.['required']">La patente es requerida</div>
+          <div *ngIf="form.controls.patente.errors?.['pattern']">La patente debe tener 3 letras mayúsculas y 3 números ej:AAA123</div>
+
+        </div>
+
+        <app-custom-input
+        
+        autocomplete="asientos" 
+        [control]="form.controls.asientos"
+        type="text"
+        label="Asientos disponibles" 
+        label-placement="floating"
+        ></app-custom-input>
+        <div class="validators" *ngIf="form.controls.asientos.errors && form.controls.asientos.touched">
+        
+          <div *ngIf="form.controls.asientos.errors?.['required']">La cantidad de asientos es requerida</div>
+          <div *ngIf="form.controls.asientos.errors?.['min']">La cantidad debe ser mínimo 1</div>
+          <div *ngIf="form.controls.asientos.errors?.['max']">La cantidad debe ser máximo 8</div>
+
+        </div>
+
+        <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+            {{ vehiculo ? 'Actualizar' : 'Agregar' }}
+            <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+    
+    </form>
+</ion-content>

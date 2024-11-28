@@ -1,0 +1,21 @@
+<app-header [showMenu]="true" title="Inicio"></app-header>
+
+<ion-content [fullscreen]="true">
+
+  <br><br><br>
+
+  <div class="botones" >
+    <ion-button class="compartir" (click)="addUpdateVehicle()" ><img src="assets/img/share.png" alt="Ups"  >Registrar Vehículo</ion-button>
+    <br><br><br>
+    <ion-button class="buscar" routerLink="/main/buscar-vehiculo"><img src="assets/img/buscar.png" alt="Ups"  >Buscar ruta</ion-button>
+    <br><br><br>
+    <ion-button  *ngFor="let v of vehicles" class="map" routerLink="/main/agregar-destino">
+      <img src="assets/img/map.png" alt="ups" > Agregar destino con {{v.marca}} {{v.modelo}}
+    </ion-button>
+    
+  </div> 
+  
+
+</ion-content>
+
+<app-footer></app-footer>

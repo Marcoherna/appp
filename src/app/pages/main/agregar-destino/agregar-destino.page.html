@@ -1,0 +1,11 @@
+<app-header backButton="/main/home" title="Agregar destino"></app-header>
+
+<ion-item button lines="none" color="light">
+  <ion-icon name="location" slot="start" color="danger"></ion-icon>
+  <ion-label>Establece la ubicación del destino</ion-label>
+</ion-item>
+
+<ion-button [routerLink]="['/main/map-direccion-conductor']" shape="round">
+  <strong>establecer</strong>
+  <ion-icon slot="end" name="locate"></ion-icon>
+</ion-button>

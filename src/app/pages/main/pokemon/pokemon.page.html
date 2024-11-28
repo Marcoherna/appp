@@ -1,0 +1,22 @@
+<app-header backButton="/main/home" title="Lista pokemon"></app-header>
+  
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchPokemon()" placeholder="Buscar Pokémon"></ion-searchbar>
+  
+    <ion-list>
+      <ion-item *ngFor="let pokemon of filteredPokemonList" (click)="loadPokemonDetails(pokemon.name)">
+        {{ pokemon.name }}
+      </ion-item>
+    </ion-list>
+  
+    <div *ngIf="selectedPokemon">
+      <h2>{{ selectedPokemon.name }}</h2>
+      <img [src]="selectedPokemon.sprites.front_default" alt="{{ selectedPokemon.name }}">
+      <p>Altura: {{ selectedPokemon.height }}</p>
+      <p>Peso: {{ selectedPokemon.weight }}</p>
+      <p>Tipos:</p>
+      <ul>
+        <li *ngFor="let type of selectedPokemon.types">{{ type.type.name }}</li>
+      </ul>
+    </div>
+  </ion-content>
